@@ -3,7 +3,7 @@ import { GameState } from '../state/game';
 import { gameReducer } from './game';
 import { GameActions } from '../actions';
 
-describe('Hero Reducer', () => {
+describe('GameReducer', () => {
   let state: GameState;
 
   beforeEach(() => {
