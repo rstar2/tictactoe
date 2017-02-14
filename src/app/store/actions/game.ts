@@ -2,10 +2,10 @@
  * Created by rumen on 2/13/2017.
  */
 
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 
-import { type } from "../utils";
-import { TileState } from "../../model/state";
+import { type } from '../utils';
+import { TileState } from '../../model/state';
 
 export const TILE_UPDATE: string = type('[Tile] Update state');
 

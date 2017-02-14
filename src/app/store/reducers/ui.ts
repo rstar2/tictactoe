@@ -2,11 +2,11 @@
  * Created by rumen on 2/13/2017.
  */
 
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 
-import { UIState, initialUIState } from "../state/ui";
-import { UIActions } from "../actions";
-import { AppState } from "../state";
+import { UIState, initialUIState } from '../state/ui';
+import { UIActions } from '../actions';
+import { AppState } from '../state';
 
 export const uiReducer =
   function (state: UIState = initialUIState, action: Action): UIState {

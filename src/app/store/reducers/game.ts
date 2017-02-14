@@ -2,13 +2,13 @@
  * Created by rumen on 2/13/2017.
  */
 
-import { Action, ActionReducer } from "@ngrx/store";
+import { Action, ActionReducer } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
-import { TileState } from "../../model";
-import { GameState, initialGameState } from "../state/game";
-import { GameActions } from "../actions";
-import { AppState } from "../state";
+import { TileState } from '../../model';
+import { GameState, initialGameState } from '../state/game';
+import { GameActions } from '../actions';
+import { AppState } from '../state';
 
 
 export const gameReducer = function (len1: number, len2: number): ActionReducer<GameState> {

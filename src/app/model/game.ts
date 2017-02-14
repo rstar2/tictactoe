@@ -2,11 +2,11 @@
  * Created by rumen on 2/12/2017.
  */
 
-import { Tile } from "./tile";
-import { TileState } from "./type";
+import { Tile } from './tile';
+import { TileState } from './state';
 
 export interface Game {
-  readonly tiles: Matrix<Tile>
+  readonly tiles: Matrix<Tile>;
 }
 
 let _createEmpty = (len: number): Tile[] => {

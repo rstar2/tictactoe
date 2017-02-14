@@ -3,7 +3,7 @@
  */
 
 export interface UIState {
-  todo: boolean
+  todo: boolean;
 }
 
 export const initialUIState: UIState = {
