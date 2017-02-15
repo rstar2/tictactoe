@@ -9,6 +9,9 @@ export const GAME_SERVICE = new OpaqueToken('game.service');
 
 export interface GameService {
 
-  updateTile(tile: Tile, tileState: TileState): Observable<Tile>;
+  // test
+  getTitle(): Observable<string>;
+
+  updateTile(tile: Tile, tileState: TileState): Promise<any>;
 
 }

@@ -5,13 +5,13 @@
 import { Action } from '@ngrx/store';
 
 import { type } from '../utils';
-import { TileState } from '../../model/state';
+import { Tile, TileState } from '../../model';
 
 export const TILE_UPDATE: string = type('[Tile] Update state');
 
 export class TileUpdateTypeAction implements Action {
   type = TILE_UPDATE;
 
-  constructor(public payload: {index: IndexPair, state: TileState}) {
+  constructor(public payload: {tile: Tile, state: TileState}) {
   }
 }
