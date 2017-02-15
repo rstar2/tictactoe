@@ -10,7 +10,7 @@ import appStore from './store';
 
 import { GameEffects } from './effects/game';
 import { AppComponent } from './app.component';
-import GameFirebaseService from './services';
+import gameServices  from './services';
 
 import firebaseConfig from './firebase.config';
 
@@ -27,7 +27,7 @@ import firebaseConfig from './firebase.config';
 
     AngularFireModule.initializeApp(firebaseConfig),
   ],
-  providers: [...GameFirebaseService],
+  providers: [...gameServices],
   bootstrap: [AppComponent]
 })
 export class AppModule {

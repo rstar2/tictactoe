@@ -1,14 +1,13 @@
-import { todo } from '../store/reducers';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { GameActions } from '../store/actions';
-import { GameFirebaseService } from '../services/game-firebase.service';
+import { GAME_SERVICE, GameService } from '../services';
 
 @Injectable()
 export class GameEffects {
   constructor(private update$: Actions,
-    private svc: GameFirebaseService
+    @Inject(GAME_SERVICE) private gameService: GameService
   ) { }
 
   // TODO: implement
