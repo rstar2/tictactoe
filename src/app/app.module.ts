@@ -4,15 +4,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AngularFireModule } from 'angularfire2';
 
-import appStore from './store';
+import appStoreReducer from './store';
 
 import { GameEffects } from './effects/game';
 import { AppComponent } from './app.component';
 import providerServices  from './services';
 
 import firebaseConfig from './firebase.config';
+
 
 @NgModule({
   declarations: [
@@ -22,10 +24,30 @@ import firebaseConfig from './firebase.config';
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore(appStore),
     EffectsModule.run(GameEffects),
 
     AngularFireModule.initializeApp(firebaseConfig),
+
+    /**
+     * StoreModule.provideStore is imported once in the root module, accepting a reducer
+     * function or object map of reducer functions. If passed an object of
+     * reducers, combineReducers will be run creating your application
+     * meta-reducer. This returns all providers for an @ngrx/store
+     * based application.
+     */
+    StoreModule.provideStore(appStoreReducer),
+
+    /**
+     * Store devtools instrument the store retaining past versions of state
+     * and recalculating new states. This enables powerful time-travel
+     * debugging.
+     *
+     * To use the debugger, install the Redux Devtools extension for either
+     * Chrome or Firefox
+     *
+     * See: https://github.com/zalmoxisus/redux-devtools-extension
+     */
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   providers: [...providerServices],
   bootstrap: [AppComponent]

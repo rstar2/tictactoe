@@ -17,7 +17,7 @@ describe('GameReducer', () => {
     let result = reducer(undefined, { type: 'SOME ACTION' });
 
     result.currentGame.tiles.forEach((arr) => {
-      arr.forEach(tile => expect(tile.type).toBe(TileState.Empty));
+      arr.forEach(tile => expect(tile.state).toBe(TileState.Empty));
     });
   });
 });
