@@ -3,6 +3,7 @@
  */
 
 import { Action } from '@ngrx/store';
+import { createSelector } from 'reselect';
 
 import { UIState, initialUIState } from '../state/ui';
 import { UIActions } from '../actions';
@@ -21,4 +22,9 @@ export const uiReducer =
     }
   };
 
-const getUIState = (state: AppState): UIState => state.ui;
+export const getUIState = (state: AppState): UIState => state.ui;
+
+export const getUIStateTodo = createSelector(
+  getUIState,
+  (state: UIState) => state.todo);
+

@@ -4,10 +4,7 @@
 
 import * as GameActions from './game';
 import * as UIActions from './ui';
+import * as TitleActions from './title';
 
 // export here for object imports
-export { GameActions, UIActions };
-
-// export here for injecting the dependencies (e.g. at bootstrap)
-export default [GameActions, UIActions];
-
+export { GameActions, UIActions, TitleActions };

@@ -52,7 +52,7 @@ export const gameReducer = (len1: number, len2: number): ActionReducer<GameState
   };
 };
 
-const getGameState = (state: AppState): GameState => state.game;
+export const getGameState = (state: AppState): GameState => state.game;
 
 export const getCurrentGame = createSelector(
   getGameState,
