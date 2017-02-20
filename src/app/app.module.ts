@@ -4,26 +4,25 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from 'angularfire2';
 
 import appStoreReducer from './store';
 
 import { GameEffects } from './effects/game';
-import { AppComponent } from './app.component';
-import providerServices  from './services';
+import providerServices from './services';
 
 import firebaseConfig from './firebase.config';
+import { ComponentsModule, AppComponent } from './components';
+
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+
     EffectsModule.run(GameEffects),
 
     AngularFireModule.initializeApp(firebaseConfig),
@@ -48,6 +47,8 @@ import firebaseConfig from './firebase.config';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
+
+    ComponentsModule
   ],
   providers: [...providerServices],
   bootstrap: [AppComponent]

@@ -1,14 +1,13 @@
-import { AppState } from './store/state';
 import { Store } from '@ngrx/store';
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { GAME_SERVICE, GameService } from './services';
-import { getTitle, getGameState  } from './store/reducers';
+import { AppState } from '../store/state';
+import { GAME_SERVICE, GameService } from '../services';
+import { getTitle, getGameState } from '../store/reducers';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   title = 'app works!';

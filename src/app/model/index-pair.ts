@@ -7,7 +7,9 @@ export class IndexPair {
   }
 
   equals(other?: IndexPair): boolean {
-    if (!other) return false;
+    if (!other) {
+      return false;
+    }
     return this.index1 === other.index1 && this.index2 === other.index2;
   }
 }
