@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { IndexPair, TileState, Tile } from '../../model';
+import { AppState } from '../../store/state';
+import { getCurrentGame } from '../../store/reducers';
+import { IndexPair, TileState, Tile, Game } from '../../model';
 
 @Component({
   selector: 'app-game',
@@ -8,24 +11,28 @@ import { IndexPair, TileState, Tile } from '../../model';
     <p>
       game Works!
     </p>
+
+    <!-- using a pipe -->
     <div>
          <app-tile
-           *ngFor="let tile of tiles"
+           *ngFor="let tile of game | gameToTiles"
            [tile]="tile"
            (click)="onTileClick(tile, $event)"
          ></app-tile>
-         <div appForEachTile></div>
     </div>
+
+    <!-- using a structural directive - not ready yet -->
+    <ng-container *appForEachTile="let tile of game.tiles"></ng-container>
   `,
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
 
-  tiles: Tile[];
+  game: Game;
 
   isWaiting = false;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   onTileClick(tile: Tile, event: MouseEvent) {
     if (event.ctrlKey) {
@@ -39,21 +46,9 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tiles = [
-      {
-        index: new IndexPair(0, 0),
-        state: TileState.Empty
-      },
-      {
-        index: new IndexPair(0, 1),
-        state: TileState.Empty
-      },
-      {
-        index: new IndexPair(1, 0),
-        state: TileState.Empty
-      }
-    ];
-
+    this.store.select(getCurrentGame).subscribe((game: Game) => {
+      this.game = game;
+    });
   }
 
 

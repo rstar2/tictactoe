@@ -46,7 +46,7 @@ export class TileComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
   }
 
   ngDoCheck(): void {
-    console.log('DoCheck tile', this.tile);
+    //console.log('DoCheck tile', this.tile);
   }
 
 }
