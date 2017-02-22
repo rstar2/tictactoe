@@ -14,15 +14,20 @@ import { IndexPair, TileState, Tile, Game } from '../../model';
 
     <!-- using a pipe -->
     <div>
-         <app-tile
-           *ngFor="let tile of game | gameToTiles"
-           [tile]="tile"
-           (click)="onTileClick(tile, $event)"
-         ></app-tile>
+        <app-tile
+            *ngFor="let tile of game | gameToTiles"
+            [tile]="tile"
+            (click)="onTileClick(tile, $event)"
+        ></app-tile>
     </div>
 
     <!-- using a structural directive - not ready yet -->
-    <ng-container *appForEachTile="let tile of game.tiles"></ng-container>
+    <ng-container *appForEachTile="let tile of game.tiles">
+        <app-tile
+            [tile]="tile"
+            (click)="onTileClick(tile, $event)"
+         ></app-tile>
+    </ng-container>
   `,
   styleUrls: ['./game.component.css']
 })
