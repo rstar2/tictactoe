@@ -9,7 +9,12 @@ import { IndexPair, TileState, Tile } from '../../model';
       game Works!
     </p>
     <div>
-         <app-tile *ngFor="let tile of tiles" [tile]="tile"></app-tile>
+         <app-tile
+           *ngFor="let tile of tiles"
+           [tile]="tile"
+           (click)="onTileClick(tile, $event)"
+         ></app-tile>
+         <div appForEachTile></div>
     </div>
   `,
   styleUrls: ['./game.component.css']
@@ -18,7 +23,20 @@ export class GameComponent implements OnInit {
 
   tiles: Tile[];
 
+  isWaiting = false;
+
   constructor() { }
+
+  onTileClick(tile: Tile, event: MouseEvent) {
+    if (event.ctrlKey) {
+      if (!this.isWaiting) { return; }
+      console.log('Click-Ctrl', tile);
+    } else {
+      if (this.isWaiting) { return; }
+      console.log('Click', tile);
+    }
+    this.isWaiting = !this.isWaiting;
+  }
 
   ngOnInit() {
     this.tiles = [
