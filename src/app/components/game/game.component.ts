@@ -46,13 +46,16 @@ export class GameComponent implements OnInit {
       },
       {
         index: new IndexPair(0, 1),
-        state: TileState.Ex1
+        state: TileState.Empty
       },
       {
         index: new IndexPair(1, 0),
-        state: TileState.Zero0
+        state: TileState.Empty
       }
     ];
+
   }
+
+
 
 }
