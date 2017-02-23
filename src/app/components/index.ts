@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DirectivesModule } from '../directives';
 
-import { GamePipe } from '../pipes';
+import { PipesModule } from '../pipes';
 
 
 import { GameComponent } from './game/game.component';
@@ -14,10 +14,10 @@ import { AppComponent } from './app.component';
 @NgModule({
   imports: [
     CommonModule,
-    DirectivesModule
+    DirectivesModule,
+    PipesModule
   ],
   declarations: [
-    GamePipe,
     AppComponent, GameComponent, TileComponent
   ],
   exports: [AppComponent],

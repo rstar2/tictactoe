@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { IndexPair, TileState, Tile, Game } from '../../model';
+
 import { AppState } from '../../store/state';
 import { getCurrentGame } from '../../store/reducers';
-import { IndexPair, TileState, Tile, Game } from '../../model';
+import { GameActions } from '../../store/actions';
+
 
 @Component({
   selector: 'app-game',
@@ -40,14 +43,27 @@ export class GameComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   onTileClick(tile: Tile, event: MouseEvent) {
-    if (event.ctrlKey) {
-      if (!this.isWaiting) { return; }
-      console.log('Click-Ctrl', tile);
-    } else {
-      if (this.isWaiting) { return; }
-      console.log('Click', tile);
+    if (tile.state !== TileState.Empty) {
+      console.warn('Tile', tile, ' is already dirty');
+      return;
     }
+
+    // if (event.ctrlKey === !this.isWaiting) {
+    //   console.warn('Waiting for our turn');
+    //   return;
+    // }
     this.isWaiting = !this.isWaiting;
+
+    let stateNew;
+    if (this.isWaiting) {
+      console.log('Opponent turn', tile);
+      stateNew = TileState.Zero0;
+    } else {
+      console.log('My turn on', tile);
+      stateNew = TileState.Ex1;
+    }
+    let tileNew = Object.assign(tile, {state: stateNew});
+    this.store.dispatch(new GameActions.TileUpdateAction(tileNew));
   }
 
   ngOnInit() {

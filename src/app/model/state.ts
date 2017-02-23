@@ -3,7 +3,7 @@
  */
 
 export enum TileState {
-  Empty,
-  Zero0,
-  Ex1
+  Empty = 1000,
+  Zero0 = 0,
+  Ex1 = 1
 }

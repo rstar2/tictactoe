@@ -9,7 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 
 import appStoreReducer from './store';
 
-import { GameEffects } from './effects/game';
+import { GameEffects, TitleEffects } from './effects';
 import providerServices from './services';
 
 import firebaseConfig from './firebase.config';
@@ -24,6 +24,7 @@ import { ComponentsModule, AppComponent } from './components';
     HttpModule,
 
     EffectsModule.run(GameEffects),
+    EffectsModule.run(TitleEffects),
 
     AngularFireModule.initializeApp(firebaseConfig),
 

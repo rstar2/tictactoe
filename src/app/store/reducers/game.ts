@@ -12,8 +12,8 @@ import { AppState } from '../state';
 
 let tileReducer = (tile: Tile, action: Action): Tile => {
   switch (action.type) {
-    case GameActions.TILE_UPDATE:
-      const tileCur: Tile = (<GameActions.TileUpdateTypeAction>action).payload;
+    case GameActions.TILE_UPDATE_SUCCESS:
+      const tileCur: Tile = (<GameActions.TileUpdateSuccessAction>action).payload;
 
       if (!tile.index.equals(tileCur.index)) {
         return tile;
@@ -30,7 +30,7 @@ let tileReducer = (tile: Tile, action: Action): Tile => {
 
 let tilesReducer: ActionReducer<Game> = (game: Game, action: Action): Game => {
   switch (action.type) {
-    case GameActions.TILE_UPDATE:
+    case GameActions.TILE_UPDATE_SUCCESS:
       return {
         tiles: game.tiles.map(tile => tileReducer(tile, action))
       };
@@ -42,7 +42,7 @@ let tilesReducer: ActionReducer<Game> = (game: Game, action: Action): Game => {
 export const gameReducer = (len1: number, len2: number): ActionReducer<GameState> => {
   return (state: GameState = initialGameState(len1, len2), action: Action): GameState => {
     switch (action.type) {
-      case GameActions.TILE_UPDATE:
+      case GameActions.TILE_UPDATE_SUCCESS:
         return {
           currentGame: tilesReducer(state.currentGame, action)
         };
