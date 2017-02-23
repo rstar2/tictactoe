@@ -9,7 +9,7 @@ import { UIState, initialUIState } from '../state/ui';
 import { UIActions } from '../actions';
 import { AppState } from '../state';
 
-export const uiReducer =
+export const uiStateReducer =
   function (state: UIState = initialUIState, action: Action): UIState {
     switch (action.type) {
       case UIActions.UI_UPDATE:

@@ -1,6 +1,6 @@
 import { TileState } from '../../model';
 import { GameState } from '../state/game';
-import { gameReducer } from './game';
+import { gameStateReducer } from './game';
 import { GameActions } from '../actions';
 
 describe('GameReducer', () => {
@@ -8,16 +8,15 @@ describe('GameReducer', () => {
 
   beforeEach(() => {
     state = {
-      currentGame: undefined
+      game: undefined,
+      isMyTurn: false
     };
   });
 
   it('uses an initial state when none is given', () => {
-    let reducer = gameReducer(3, 3);
-    let result = reducer(undefined, { type: 'SOME ACTION' });
+    let reducer = gameStateReducer(3, 3);
+    let result = reducer(undefined, {type: 'SOME ACTION'});
 
-    result.currentGame.tiles.forEach((arr) => {
-      arr.forEach(tile => expect(tile.state).toBe(TileState.Empty));
-    });
+    result.game.tiles.forEach((tile, index) => expect(tile.state).toBe(TileState.Empty));
   });
 });

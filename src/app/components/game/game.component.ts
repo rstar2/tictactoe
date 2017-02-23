@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { IndexPair, TileState, Tile, Game } from '../../model';
 
 import { AppState } from '../../store/state';
-import { getCurrentGame } from '../../store/reducers';
+import { getGame } from '../../store/reducers';
 import { GameActions } from '../../store/actions';
 
 
@@ -38,40 +38,37 @@ export class GameComponent implements OnInit {
 
   game: Game;
 
-  isWaiting = false;
+  tileStateMe: TileState;
+  tileStateOponent: TileState;
 
-  constructor(private store: Store<AppState>) { }
+  isMyTurn: boolean;
 
-  onTileClick(tile: Tile, event: MouseEvent) {
+  constructor(private store: Store<AppState>) {
+  }
+
+  ngOnInit() {
+    this.tileStateMe = TileState.Zero0;
+    this.tileStateOponent = TileState.Ex1;
+    this.isMyTurn = true;
+
+    this.store.select(getGame).subscribe((game: Game) => {
+      this.game = game;
+    });
+  }
+
+  onTileClick(tile: Tile) {
     if (tile.state !== TileState.Empty) {
       console.warn('Tile', tile, ' is already dirty');
       return;
     }
 
-    // if (event.ctrlKey === !this.isWaiting) {
-    //   console.warn('Waiting for our turn');
+    // if (!this.isMyTurn) {
+    //   console.info('Waiting for my turn');
     //   return;
     // }
-    this.isWaiting = !this.isWaiting;
-
-    let stateNew;
-    if (this.isWaiting) {
-      console.log('Opponent turn', tile);
-      stateNew = TileState.Zero0;
-    } else {
-      console.log('My turn on', tile);
-      stateNew = TileState.Ex1;
-    }
-    let tileNew = Object.assign(tile, {state: stateNew});
+    this.isMyTurn = !this.isMyTurn;
+    let tileNew = Object.assign(tile, {state: this.isMyTurn ? this.tileStateMe : this.tileStateOponent});
     this.store.dispatch(new GameActions.TileUpdateAction(tileNew));
   }
-
-  ngOnInit() {
-    this.store.select(getCurrentGame).subscribe((game: Game) => {
-      this.game = game;
-    });
-  }
-
-
 
 }

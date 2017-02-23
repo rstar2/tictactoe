@@ -5,11 +5,13 @@
 import { Game, initialGame } from '../../model/game';
 
 export interface GameState {
-  currentGame: Game;
+  game: Game;
+  isMyTurn: boolean
 }
 
 export function initialGameState(len1, len2): GameState {
   return {
-    currentGame: initialGame(len1, len2)
+    game: initialGame(len1, len2),
+    isMyTurn: false
   };
 }

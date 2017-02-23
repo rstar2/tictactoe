@@ -18,6 +18,7 @@ export class GameEffects {
 
   @Effect() tileUpdate$ = this.update$
     .ofType(GameActions.TILE_UPDATE)
+    .do(() => this.store.dispatch(new GameActions.MyTurnUpdateAction(false)))
     .map(action => action.payload)
     // TODO: implement
     //.switchMap(() => this.gameService.updateTile())

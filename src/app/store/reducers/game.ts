@@ -28,7 +28,7 @@ let tileReducer = (tile: Tile, action: Action): Tile => {
   }
 };
 
-let tilesReducer: ActionReducer<Game> = (game: Game, action: Action): Game => {
+let gameReducer: ActionReducer<Game> = (game: Game, action: Action): Game => {
   switch (action.type) {
     case GameActions.TILE_UPDATE_SUCCESS:
       return {
@@ -39,12 +39,27 @@ let tilesReducer: ActionReducer<Game> = (game: Game, action: Action): Game => {
   }
 };
 
-export const gameReducer = (len1: number, len2: number): ActionReducer<GameState> => {
+let myTurnReducer = (isMyTurn, action: Action): boolean => {
+  switch (action.type) {
+    case GameActions.MY_TURN_UPDATE:
+      return (<GameActions.MyTurnUpdateAction>action).payload;
+    default:
+      return isMyTurn;
+  }
+};
+
+export const gameStateReducer = (len1: number, len2: number): ActionReducer<GameState> => {
   return (state: GameState = initialGameState(len1, len2), action: Action): GameState => {
     switch (action.type) {
       case GameActions.TILE_UPDATE_SUCCESS:
         return {
-          currentGame: tilesReducer(state.currentGame, action)
+          game: gameReducer(state.game, action),
+          isMyTurn: state.isMyTurn
+        };
+      case GameActions.MY_TURN_UPDATE:
+        return {
+          game: state.game,
+          isMyTurn: myTurnReducer(state.isMyTurn, action)
         };
       default:
         return state;
@@ -54,7 +69,7 @@ export const gameReducer = (len1: number, len2: number): ActionReducer<GameState
 
 export const getGameState = (state: AppState): GameState => state.game;
 
-export const getCurrentGame = createSelector(
+export const getGame = createSelector(
   getGameState,
-  (state: GameState) => state.currentGame);
+  (state: GameState) => state.game);
 
