@@ -73,3 +73,10 @@ export const getGame = createSelector(
   getGameState,
   (state: GameState) => state.game);
 
+
+export const getMyTurn = createSelector(
+  getGameState,
+  (state: GameState) => state.isMyTurn);
+
+
+

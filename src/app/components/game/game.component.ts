@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { IndexPair, TileState, Tile, Game } from '../../model';
 
 import { AppState } from '../../store/state';
-import { getGame } from '../../store/reducers';
+import { getGame, getMyTurn } from '../../store/reducers';
 import { GameActions } from '../../store/actions';
 
 
@@ -12,7 +12,7 @@ import { GameActions } from '../../store/actions';
   selector: 'app-game',
   template: `
     <p>
-      game Works!
+      {{ isMyTurn ? "It's my turn" : "Waiting for oponent turn"}}
     </p>
 
     <!-- using a pipe -->
@@ -47,12 +47,15 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tileStateMe = TileState.Zero0;
-    this.tileStateOponent = TileState.Ex1;
-    this.isMyTurn = true;
+    this.tileStateMe = TileState.Ex1;
+    this.tileStateOponent = TileState.Zero0;
 
     this.store.select(getGame).subscribe((game: Game) => {
       this.game = game;
+    });
+
+    this.store.select(getMyTurn).subscribe((isMyTurn: boolean) => {
+      this.isMyTurn = isMyTurn;
     });
   }
 
@@ -62,11 +65,11 @@ export class GameComponent implements OnInit {
       return;
     }
 
-    // if (!this.isMyTurn) {
-    //   console.info('Waiting for my turn');
-    //   return;
-    // }
-    this.isMyTurn = !this.isMyTurn;
+    if (!this.isMyTurn) {
+      console.log('Waiting for my turn');
+      return;
+    }
+
     let tileNew = Object.assign(tile, {state: this.isMyTurn ? this.tileStateMe : this.tileStateOponent});
     this.store.dispatch(new GameActions.TileUpdateAction(tileNew));
   }

@@ -18,10 +18,11 @@ import { Tile, TileState } from '../../model';
   selector: 'app-tile',
   changeDetection: ChangeDetectionStrategy.Default,
   template: `
-    <svg [ngSwitch]="tile.state" width="100" height="100" [attr.class]="tileClass">
-        <circle  *ngSwitchCase="TileState.Empty" cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-        <circle  *ngSwitchCase="TileState.Zero0" cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-        <polygon *ngSwitchCase="TileState.Ex1" points="50,10 10,90 90,35 10,35 90,90" style="fill:lime;stroke:purple;stroke-width:5;"/>
+    <svg [ngSwitch]="tile.state">
+        <circle class="Empty" cx="50" cy="50" r="40"  />
+
+        <path [attr.class]="tileClass" *ngSwitchCase="TileState.Zero0" d="M 10,10 L 30,30 M 30,10 L 10,30" />
+        <polygon [attr.class]="tileClass" *ngSwitchCase="TileState.Ex1" points="50,10 10,90 90,35 10,35 90,90"/>
     </svg>
   `,
   styleUrls: ['./tile.component.css']

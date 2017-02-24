@@ -12,6 +12,6 @@ export interface GameState {
 export function initialGameState(len1, len2): GameState {
   return {
     game: initialGame(len1, len2),
-    isMyTurn: false
+    isMyTurn: true
   };
 }
