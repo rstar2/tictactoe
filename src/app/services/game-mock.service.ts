@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { GameService } from './game.service';
-
 import { Tile, TileState } from '../model';
 
 
 @Injectable()
-export class GameMockService implements GameService {
+export class GameMockService extends GameService {
 
   getTitle(): Observable<string> {
     return new Observable<string>(observer => {
@@ -20,7 +19,7 @@ export class GameMockService implements GameService {
     });
   }
 
-  updateTile(tile: Tile, tileState: TileState): Promise<any> {
+  updateTile(tile: Tile): Observable<Tile> {
     return null;
   }
 }
