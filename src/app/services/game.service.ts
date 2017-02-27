@@ -1,21 +1,33 @@
+import { Injectable, OpaqueToken } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
 
+import { AppState } from '../store/state';
 import { Tile, TileState, GameResult } from '../model';
-
-import { OpaqueToken } from '@angular/core';
 
 export const GAME_SERVICE = new OpaqueToken('game.service');
 
-export interface GameService {
+@Injectable()
+export abstract class GameService {
 
-  // testing
-  getTitle(): Observable<string>;
+  constructor(protected store: Store<AppState>) {
+  }
 
-  startGame(oponentUid: string, isMyTurn: boolean): Promise<any>;
+  abstract getTitle(): Observable<string>;
 
-  finishGame(result: GameResult): Promise<any>;
+  requestPlayWith(opponentUID: string): void {
 
-  updateTile(tile: Tile, tileState: TileState): Promise<any>;
-  
+  }
+
+  leavePlay(): void {
+
+  }
+
+  startNewGame(): void {
+
+  }
+
+  updateTile(tile: Tile): void {
+  }
 
 }

@@ -13,7 +13,10 @@ export class GamePipe implements PipeTransform {
     }
 
     let flatArr: Array<Tile> = [];
-    game.tiles.forEach(item => flatArr.push(item));
+    game.tiles.forEach(item => {
+      flatArr.push(item);
+      return false;
+    } );
     return flatArr;
   }
 

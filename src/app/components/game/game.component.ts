@@ -70,7 +70,7 @@ export class GameComponent implements OnInit {
       return;
     }
 
-    let tileNew = Object.assign(tile, {state: this.isMyTurn ? this.tileStateMe : this.tileStateOponent});
+    let tileNew = Object.assign({}, tile, {state: this.isMyTurn ? this.tileStateMe : this.tileStateOponent});
     this.store.dispatch(new GameActions.TileUpdateAction(tileNew));
   }
 

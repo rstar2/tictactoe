@@ -5,7 +5,7 @@ import { GameService } from './game.service';
 import { GameResult, Tile, TileState } from '../model';
 
 @Injectable()
-export class GameMockService implements GameService {
+export class GameMockService extends GameService {
 
   getTitle(): Observable<string> {
     return new Observable<string>(observer => {
@@ -18,15 +18,4 @@ export class GameMockService implements GameService {
     });
   }
 
-  public updateTile(tile: Tile, tileState: TileState): Promise<any> {
-    throw 'Not Implemented';
-  }
-
-  public finishGame(result: GameResult): Promise<any> {
-    throw 'Not Implemented';
-  }
-
-  public startGame(oponentUid: string, isMyTurn: boolean): Promise<any> {
-    throw 'Not Implemented';
-  }
 }

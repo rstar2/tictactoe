@@ -13,15 +13,15 @@ import { AppState } from '../state';
 let tileReducer = (tile: Tile, action: Action): Tile => {
   switch (action.type) {
     case GameActions.TILE_UPDATE_SUCCESS:
-      const tileCur: Tile = (<GameActions.TileUpdateSuccessAction>action).payload;
+      const tileNew: Tile = (<GameActions.TileUpdateSuccessAction>action).payload;
 
-      if (!tile.index.equals(tileCur.index)) {
+      if (!tile.index.equals(tileNew.index)) {
         return tile;
       }
 
       return {
-        index: tileCur.index,
-        state: tileCur.state
+        index: tile.index,
+        state: tileNew.state
       };
     default:
       return tile;

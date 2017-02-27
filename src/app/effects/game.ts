@@ -16,15 +16,16 @@ export class GameEffects {
     private store: Store<AppState>) {
   }
 
-  @Effect() tileUpdate$ = this.update$
+  @Effect({ dispatch: false })
+  tileUpdate$ = this.update$
     .ofType(GameActions.TILE_UPDATE)
     .do(() => this.store.dispatch(new GameActions.MyTurnUpdateAction(false)))
     .map(action => action.payload)
-    .map(tile => new GameActions.TileUpdateSuccessAction(tile));
-    // .do(tile => this.gameService.updateTile(tile));
+    .do(tile => this.gameService.updateTile(tile));
 
   // just for testing
-  @Effect() myTurnUpdate$ = this.update$
+  @Effect({ dispatch: false })
+  myTurnUpdate$ = this.update$
     .ofType(GameActions.TILE_UPDATE_SUCCESS)
     .delay(3000)
     .do(() => this.store.dispatch(new GameActions.MyTurnUpdateAction(true)));

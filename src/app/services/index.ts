@@ -33,11 +33,12 @@ export const mockServices = commonServices.concat(
   }
 );
 
-export default commonServices.concat({
-  provide: GAME_SERVICE,
-  useFactory: gameServiceFactory,
-  deps: [OpponentService, Store, AngularFire]
-}
+export default commonServices.concat(
+  {
+    provide: GAME_SERVICE,
+    useFactory: gameServiceFactory,
+    deps: [OpponentService, Store, AngularFire]
+  }
 );
 
 

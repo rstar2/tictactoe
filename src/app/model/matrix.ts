@@ -9,26 +9,26 @@ export class Matrix<T> {
 
   constructor(private data: Array<Array<T>>) { }
 
-  forEach(callbackfn: (value: T, index: IndexPair) => boolean) {
+  forEach(callbackfn: (value: T) => boolean) {
     this.data.some((col: Array<T>, colIndex: number): boolean => {
       let toStop = false;
       col.some((item: T, rowIndex: number): boolean => {
-        toStop = callbackfn(item, new IndexPair(colIndex, rowIndex));
+        toStop = callbackfn(item);
         return toStop;
       });
       return toStop;
     });
   }
 
-  map(callbackfn: (value: T, index: IndexPair) => T): Matrix<T> {
-    let newMatrix: Array<Array<T>> = []
+  map(callbackfn: (value: T) => T): Matrix<T> {
+    let newMatrix: Array<Array<T>> = [];
 
     this.data.forEach((col: Array<T>, colIndex: number) => {
-      let row: T[] = [];
+      let row: Array<T> = [];
       newMatrix.push(row);
       col.forEach((item: T, rowIndex: number) => {
-        let newItem: T = callbackfn(item, new IndexPair(colIndex, rowIndex));
-        row.push(item);
+        let itemNew: T = callbackfn(item);
+        row.push(itemNew);
       });
     });
 
