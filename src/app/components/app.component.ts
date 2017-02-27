@@ -1,5 +1,5 @@
-import { Store } from '@ngrx/store';
 import { Component, Inject, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { AppState } from '../store/state';
 import { GAME_SERVICE, GameService } from '../services';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     // use directly the service
     // this.gameService.getTitle().subscribe(title => this.title = title);
 
-    // use the store (and listen to cganges from it)
+    // use the store (and listen to changes from it)
     this.store.select(getTitle).subscribe(title => this.title = title);
   }
 }
