@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { GameService } from './game.service';
-
-import { Tile, TileState } from '../model';
-
+import { GameResult, Tile, TileState } from '../model';
 
 @Injectable()
 export class GameMockService implements GameService {
@@ -20,7 +18,15 @@ export class GameMockService implements GameService {
     });
   }
 
-  updateTile(tile: Tile, tileState: TileState): Promise<any> {
-    return null;
+  public updateTile(tile: Tile, tileState: TileState): Promise<any> {
+    throw 'Not Implemented';
+  }
+
+  public finishGame(result: GameResult): Promise<any> {
+    throw 'Not Implemented';
+  }
+
+  public startGame(oponentUid: string, isMyTurn: boolean): Promise<any> {
+    throw 'Not Implemented';
   }
 }

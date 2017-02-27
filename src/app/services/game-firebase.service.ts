@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/share';
 
 import { GameService } from './game.service';
-
 import { Tile, TileState } from '../model';
 
 @Injectable()

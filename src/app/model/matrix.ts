@@ -1,3 +1,4 @@
+import { GameResult } from './game-result';
 /**
  * Created by rumen on 2/15/2017.
  */
@@ -8,11 +9,14 @@ export class Matrix<T> {
 
   constructor(private data: Array<Array<T>>) { }
 
-  forEach(callbackfn: (value: T, index: IndexPair) => void) {
-    this.data.forEach((col: Array<T>, colIndex: number) => {
-      col.forEach((item: T, rowIndex: number) => {
-        callbackfn(item, new IndexPair(colIndex, rowIndex));
+  forEach(callbackfn: (value: T, index: IndexPair) => boolean) {
+    this.data.some((col: Array<T>, colIndex: number): boolean => {
+      let toStop = false;
+      col.some((item: T, rowIndex: number): boolean => {
+        toStop = callbackfn(item, new IndexPair(colIndex, rowIndex));
+        return toStop;
       });
+      return toStop;
     });
   }
 
@@ -20,4 +24,5 @@ export class Matrix<T> {
     // TODO:
     return this;
   }
+
 }

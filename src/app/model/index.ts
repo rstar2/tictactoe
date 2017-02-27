@@ -7,3 +7,4 @@ export * from './matrix';
 export * from './state';
 export * from './tile';
 export * from './game';
+export * from './game-result';
