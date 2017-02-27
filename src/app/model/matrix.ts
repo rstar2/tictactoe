@@ -21,8 +21,18 @@ export class Matrix<T> {
   }
 
   map(callbackfn: (value: T, index: IndexPair) => T): Matrix<T> {
-    // TODO:
-    return this;
+    let newMatrix: Array<Array<T>> = []
+
+    this.data.forEach((col: Array<T>, colIndex: number) => {
+      let row: T[] = [];
+      newMatrix.push(row);
+      col.forEach((item: T, rowIndex: number) => {
+        let newItem: T = callbackfn(item, new IndexPair(colIndex, rowIndex));
+        row.push(item);
+      });
+    });
+
+    return new Matrix(newMatrix);
   }
 
 }

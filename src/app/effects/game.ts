@@ -20,9 +20,8 @@ export class GameEffects {
     .ofType(GameActions.TILE_UPDATE)
     .do(() => this.store.dispatch(new GameActions.MyTurnUpdateAction(false)))
     .map(action => action.payload)
-    // TODO: implement
-    //.switchMap(() => this.gameService.updateTile())
     .map(tile => new GameActions.TileUpdateSuccessAction(tile));
+    // .do(tile => this.gameService.updateTile(tile));
 
   // just for testing
   @Effect() myTurnUpdate$ = this.update$

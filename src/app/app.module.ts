@@ -10,7 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 import appStoreReducer from './store';
 
 import { GameEffects, TitleEffects } from './effects';
-import providerServices from './services';
+import services from './services';
 
 import firebaseConfig from './firebase.config';
 import { ComponentsModule, AppComponent } from './components';
@@ -51,7 +51,7 @@ import { ComponentsModule, AppComponent } from './components';
 
     ComponentsModule
   ],
-  providers: [...providerServices],
+  providers: [...services],
   bootstrap: [AppComponent]
 })
 export class AppModule {
