@@ -18,6 +18,10 @@ export class OpponentService implements OnInit {
   ngOnInit(): void {
   }
 
+  setOpponentUid(oppoentUid: string): void {
+    this.oppoentUid = oppoentUid;
+  }
+
   getOpponentUid(): string {
     return this.oppoentUid;
   }

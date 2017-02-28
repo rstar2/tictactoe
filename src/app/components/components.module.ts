@@ -6,6 +6,7 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { GameRoutingModule } from './game/game-routing.module';
 
+import { OpponentComponent } from './opponent/opponent.component';
 import { GameComponent } from './game/game.component';
 import { TileComponent } from './tile/tile.component';
 
@@ -18,6 +19,7 @@ import { TileComponent } from './tile/tile.component';
     GameRoutingModule
   ],
   declarations: [
+    OpponentComponent,
     GameComponent,
     TileComponent
   ],

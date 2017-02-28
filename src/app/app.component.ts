@@ -8,11 +8,10 @@ import { getTitle, getGameState } from './store/reducers';
 @Component({
   selector: 'app-root',
   template: `
-       <h1> {{title}} </h1>
+        <h1> {{title}} </h1>
         <nav>
            <a routerLink="/login">Login</a>
-           <a routerLink="/game">Game</a>
-           <a routerLink="/not">Not</a>
+           <a routerLink="/start">Start</a>
         </nav>
         <router-outlet></router-outlet>
 `
