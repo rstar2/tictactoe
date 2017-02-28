@@ -1,28 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DirectivesModule } from '../directives';
+import { DirectivesModule } from '../directives/directives.module';
+import { PipesModule } from '../pipes/pipes.module';
 
-import { PipesModule } from '../pipes';
-
+import { GameRoutingModule } from './game/game-routing.module';
 
 import { GameComponent } from './game/game.component';
 import { TileComponent } from './tile/tile.component';
-
-import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
     CommonModule,
     DirectivesModule,
-    PipesModule
+    PipesModule,
+
+    GameRoutingModule
   ],
   declarations: [
-    AppComponent, GameComponent, TileComponent
+    GameComponent,
+    TileComponent
   ],
-  exports: [AppComponent],
   providers: []
 })
 export class ComponentsModule { }
-
-export { AppComponent };

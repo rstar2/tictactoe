@@ -1,6 +1,8 @@
+import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
@@ -8,20 +10,20 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from 'angularfire2';
 
 import appStoreReducer from './store';
-
-import { GameEffects, TitleEffects } from './effects';
 import services from './services';
-
 import firebaseConfig from './firebase.config';
-import { ComponentsModule, AppComponent } from './components';
+import { GameEffects, TitleEffects } from './effects';
+import { ComponentsModule } from './components/components.module';
+import { AppComponent } from './app.component';
 
-
+import { RoutingModule } from './routes/routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    CommonModule,
 
     EffectsModule.run(GameEffects),
     EffectsModule.run(TitleEffects),
@@ -49,8 +51,13 @@ import { ComponentsModule, AppComponent } from './components';
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
 
-    ComponentsModule
+    ComponentsModule,
+
+    // the main App routing module SHOULD be LAST as
+    // otherwise the "**" path (PathNotFound) will be matched before any previous child routing module
+    RoutingModule
   ],
+  declarations: [AppComponent],
   providers: [...services],
   bootstrap: [AppComponent]
 })
