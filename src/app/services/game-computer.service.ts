@@ -1,25 +1,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/share';
 
 import { GameService } from './game.service';
 import { AppState } from '../store/state';
 import { GameActions } from '../store/actions';
-import { Tile, TileState } from '../model';
+import { Tile } from '../model';
 
 @Injectable()
 export class GameComputerService extends GameService implements OnInit {
 
-  constructor(store: Store<AppState>) {
-    super(store);
+  constructor(opponentUid: string, private store: Store<AppState>) {
+    super(opponentUid);
   }
 
   ngOnInit(): void {
-  }
-
-  getTitle(): Observable<string> {
-    return Observable.of('Playing with computer');
   }
 
   updateTile(tile: Tile) {

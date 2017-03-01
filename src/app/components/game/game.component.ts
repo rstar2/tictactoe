@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IndexPair, TileState, Tile, Game } from '../../model';
-
+import { GameService } from '../../services/game.service';
 import { AppState } from '../../store/state';
 import { getGame, getMyTurn } from '../../store/reducers';
 import { GameActions } from '../../store/actions';
@@ -38,7 +38,7 @@ export class GameComponent implements OnInit {
   game: Game;
 
   tileStateMe: TileState;
-  tileStateOponent: TileState;
+  tileStateOpponent: TileState;
 
   isMyTurn: boolean;
 
@@ -47,7 +47,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.tileStateMe = TileState.Ex1;
-    this.tileStateOponent = TileState.Zero0;
+    this.tileStateOpponent = TileState.Zero0;
 
     this.store.select(getGame).subscribe((game: Game) => {
       this.game = game;
@@ -69,7 +69,7 @@ export class GameComponent implements OnInit {
       return;
     }
 
-    let tileNew = Object.assign({}, tile, {state: this.isMyTurn ? this.tileStateMe : this.tileStateOponent});
+    let tileNew = Object.assign({}, tile, { state: this.isMyTurn ? this.tileStateMe : this.tileStateOpponent });
     this.store.dispatch(new GameActions.TileUpdateAction(tileNew));
   }
 

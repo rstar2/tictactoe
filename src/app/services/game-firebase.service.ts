@@ -13,8 +13,8 @@ import { Tile, TileState } from '../model';
 @Injectable()
 export class GameFirebaseService extends GameService implements OnInit {
 
-  constructor(store: Store<AppState>, private af: AngularFire) {
-    super(store);
+  constructor(opponentUid: string, private store: Store<AppState>, private af: AngularFire) {
+    super(opponentUid);
   }
 
   ngOnInit(): void {
@@ -23,13 +23,6 @@ export class GameFirebaseService extends GameService implements OnInit {
     //   // the snapshot in AngularFire2 has two properties snap.$key and snap.$value
     //   return snap.$value;
     // }).subscribe(tile => new GameActions.TileUpdateSuccessAction(tile));
-  }
-
-  getTitle(): Observable<string> {
-    return this.af.database.object('/title').map(snap => {
-      // the snapshot in AngularFire2 has two properties snap.$key and snap.$value
-      return snap.$value;
-    }).share();
   }
 
   updateTile(tile: Tile) {

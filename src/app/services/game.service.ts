@@ -1,21 +1,14 @@
-import { Injectable, OpaqueToken } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { Store } from '@ngrx/store';
+import { Injectable } from '@angular/core';
 
-import { AppState } from '../store/state';
-import { Tile, TileState, GameResult } from '../model';
-
-export const GAME_SERVICE = new OpaqueToken('game.service');
+import { Tile } from '../model';
 
 @Injectable()
 export abstract class GameService {
 
-  constructor(protected store: Store<AppState>) {
+  constructor(protected opponentUid: string) {
   }
 
-  abstract getTitle(): Observable<string>;
-
-  requestPlayWith(opponentUID: string): void {
+  requestPlay(): void {
 
   }
 

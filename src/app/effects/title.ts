@@ -1,16 +1,16 @@
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
 
 import { AppState } from '../store/state';
 import { TitleActions } from '../store/actions';
-import { GAME_SERVICE, GameService } from '../services';
+import { TitleService } from '../services';
 
 @Injectable()
 export class TitleEffects {
 
-  constructor(@Inject(GAME_SERVICE) private gameService: GameService,
+  constructor(private titleService: TitleService,
     private store: Store<AppState>) {
   }
 
@@ -25,12 +25,10 @@ export class TitleEffects {
    * effect easier to test.
    */
   @Effect({ dispatch: false })
-  getTitle$: Observable<any> = Observable.defer(() => {
-    this.gameService.getTitle()
-      .do(val => {
-        return val;
-      })
+  getTitle$: Observable<string> = Observable.defer(() => {
+    this.titleService.getTitle()
       .subscribe(title => this.store.dispatch(new TitleActions.TitleUpdateAction(title)));
+
     return Observable.of('OK');
   });
 

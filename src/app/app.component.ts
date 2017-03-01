@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './store/state';
-import { GAME_SERVICE, GameService } from './services';
+import { FactoryGameService, GameService } from './services';
 import { getTitle, getGameState } from './store/reducers';
 
 @Component({
