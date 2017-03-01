@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IndexPair, TileState, Tile, Game } from '../../model';
@@ -16,7 +16,7 @@ import { GameActions } from '../../store/actions';
     </p>
 
     <!-- using a pipe -->
-    <div>
+    <div class="game">
         <app-tile
             *ngFor="let tile of game | gameToTiles"
             [tile]="tile"
@@ -31,7 +31,9 @@ import { GameActions } from '../../store/actions';
             (click)="onTileClick(tile, $event)"
          ></app-tile>
     </ng-container>
-  `
+  `,
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
 

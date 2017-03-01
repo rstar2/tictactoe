@@ -1,29 +1,27 @@
-svg {
-  margin: 20px;
+.tile {
+  margin: 10px;
   background: #DDD;
-  float: left;
   border-radius: 50%;
   width: 100px;
   height: 100px;
 }
 
-
-svg .Empty {
+.tile .Empty {
   stroke: green;
   fill: yellow;
   stroke-linecap: round;
   stroke-width: 5;
 }
 
-svg .Zero0 {
+.tile .Zero0 {
   stroke: green;
   fill: yellow;
   stroke-linecap: round;
   stroke-width: 5;
 }
 
-svg .Ex1 {
-  fill:lime;
-  stroke:purple;
-  stroke-width:5;
+.tile .Ex1 {
+  fill: lime;
+  stroke: purple;
+  stroke-width: 5;
 }

@@ -1,14 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DoCheck,
   EventEmitter,
   Input,
-  OnInit,
-  OnDestroy,
   OnChanges,
-  DoCheck,
+  OnDestroy,
+  OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { Tile, TileState } from '../../model';
@@ -18,7 +19,7 @@ import { Tile, TileState } from '../../model';
   selector: 'app-tile',
   changeDetection: ChangeDetectionStrategy.Default,
   template: `
-    <svg [ngSwitch]="tile.state">
+    <svg class="tile" [ngSwitch]="tile.state">
         <circle class="Empty" cx="50" cy="50" r="40"  />
 
         <path [attr.class]="tileClass" *ngSwitchCase="TileState.Zero0" d="M 10,10 L 30,30 M 30,10 L 10,30" />
