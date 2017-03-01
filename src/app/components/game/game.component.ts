@@ -31,8 +31,7 @@ import { GameActions } from '../../store/actions';
             (click)="onTileClick(tile, $event)"
          ></app-tile>
     </ng-container>
-  `,
-  styleUrls: ['./game.component.css']
+  `
 })
 export class GameComponent implements OnInit {
 
