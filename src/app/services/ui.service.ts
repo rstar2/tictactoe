@@ -3,7 +3,7 @@ import { AngularFire } from 'angularfire2';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class TitleService implements OnInit {
+export class UIService implements OnInit {
 
   constructor(private af: AngularFire) {
   }

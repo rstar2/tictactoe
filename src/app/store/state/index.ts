@@ -8,6 +8,4 @@ import { UIState } from './ui';
 export interface AppState {
   game: GameState;
   ui: UIState;
-
-  title: string;
 }

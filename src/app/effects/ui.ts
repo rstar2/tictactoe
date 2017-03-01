@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
 
 import { AppState } from '../store/state';
-import { TitleActions } from '../store/actions';
-import { TitleService } from '../services';
+import { UIActions } from '../store/actions';
+import { UIService } from '../services';
 
 @Injectable()
-export class TitleEffects {
+export class UIEffects {
 
-  constructor(private titleService: TitleService,
+  constructor(private uiService: UIService,
     private store: Store<AppState>) {
   }
 
@@ -26,8 +26,8 @@ export class TitleEffects {
    */
   @Effect({ dispatch: false })
   getTitle$: Observable<string> = Observable.defer(() => {
-    this.titleService.getTitle()
-      .subscribe(title => this.store.dispatch(new TitleActions.TitleUpdateAction(title)));
+    this.uiService.getTitle()
+      .subscribe(title => this.store.dispatch(new UIActions.UITitleUpdateAction(title)));
 
     return Observable.of('OK');
   });

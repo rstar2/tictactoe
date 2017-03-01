@@ -3,9 +3,9 @@
  */
 
 export interface UIState {
-  todo: boolean;
+  title: string;
 }
 
 export const initialUIState: UIState = {
-  todo: false
+  title: 'Waiting'
 };

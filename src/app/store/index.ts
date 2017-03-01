@@ -9,12 +9,11 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../environments/environment';
 
 import { AppState } from './state';
-import {gameStateReducer, uiStateReducer, titleStateReducer} from './reducers';
+import { gameStateReducer, uiStateReducer } from './reducers';
 
 let appReducers = {
   game: gameStateReducer(3, 3),
-  ui: uiStateReducer,
-  title: titleStateReducer
+  ui: uiStateReducer
 };
 
 export default (state: AppState, action: Action): AppState => {

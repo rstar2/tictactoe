@@ -12,7 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import appStoreReducer from './store';
 import services from './services';
 import firebaseConfig from './firebase.config';
-import { GameEffects, TitleEffects } from './effects';
+import { GameEffects, UIEffects } from './effects';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
@@ -26,7 +26,7 @@ import { RoutingModule } from './routes/routing.module';
     CommonModule,
 
     EffectsModule.run(GameEffects),
-    EffectsModule.run(TitleEffects),
+    EffectsModule.run(UIEffects),
 
     AngularFireModule.initializeApp(firebaseConfig),
 

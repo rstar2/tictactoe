@@ -12,10 +12,10 @@ import { AppState } from '../state';
 export const uiStateReducer =
   function (state: UIState = initialUIState, action: Action): UIState {
     switch (action.type) {
-      case UIActions.UI_UPDATE:
-        const todo: boolean = (<UIActions.UIUpdateAction>action).payload;
+      case UIActions.UI_TITLE_UPDATE:
+        const title = (<UIActions.UITitleUpdateAction>action).payload;
         return {
-          todo: todo
+          title: title
         };
       default:
         return state;
@@ -24,7 +24,7 @@ export const uiStateReducer =
 
 export const getUIState = (state: AppState): UIState => state.ui;
 
-export const getUIStateTodo = createSelector(
+export const getTitle = createSelector(
   getUIState,
-  (state: UIState) => state.todo);
+  (state: UIState) => state.title);
 

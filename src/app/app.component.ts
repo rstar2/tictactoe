@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { AppState } from './store/state';
 import { FactoryGameService, GameService } from './services';
-import { getTitle, getGameState } from './store/reducers';
+import { getTitle } from './store/reducers';
 
 @Component({
   selector: 'app-root',

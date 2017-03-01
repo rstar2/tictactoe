@@ -19,10 +19,7 @@ let tileReducer = (tile: Tile, action: Action): Tile => {
         return tile;
       }
 
-      return {
-        index: tile.index,
-        state: tileNew.state
-      };
+      return Object.assign({}, tile, tileNew);
     default:
       return tile;
   }
@@ -52,15 +49,9 @@ export const gameStateReducer = (len1: number, len2: number): ActionReducer<Game
   return (state: GameState = initialGameState(len1, len2), action: Action): GameState => {
     switch (action.type) {
       case GameActions.TILE_UPDATE_SUCCESS:
-        return {
-          game: gameReducer(state.game, action),
-          isMyTurn: state.isMyTurn
-        };
+        return Object.assign({}, state, { game: gameReducer(state.game, action) });
       case GameActions.MY_TURN_UPDATE:
-        return {
-          game: state.game,
-          isMyTurn: myTurnReducer(state.isMyTurn, action)
-        };
+        return Object.assign({}, state, { isMyTurn: myTurnReducer(state.isMyTurn, action) });
       default:
         return state;
     }
@@ -73,10 +64,16 @@ export const getGame = createSelector(
   getGameState,
   (state: GameState) => state.game);
 
-
 export const getMyTurn = createSelector(
   getGameState,
   (state: GameState) => state.isMyTurn);
 
+export const getOpponent = createSelector(
+  getGameState,
+  (state: GameState) => state.opponent);
+
+  export const getOpponentTileState = createSelector(
+  getGameState,
+  (state: GameState) => state.opponentTileState);
 
 
