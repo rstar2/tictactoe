@@ -46,12 +46,24 @@ let myTurnReducer = (isMyTurn, action: Action): boolean => {
 };
 
 export const gameStateReducer = (len1: number, len2: number): ActionReducer<GameState> => {
-  return (state: GameState = initialGameState(len1, len2), action: Action): GameState => {
+  return (state: GameState = initialGameState(len1, len2, true), action: Action): GameState => {
     switch (action.type) {
+      case GameActions.GAME_START:
+        let { opponent, isMyGame } = (<GameActions.GameStartAction>action).payload;
+        return Object.assign({}, initialGameState(len1, len2, isMyGame), { opponent });
+
+      case GameActions.GAME_END:
+        let result = (<GameActions.GameEndAction>action).payload;
+        return Object.assign({}, state, { result });
+
       case GameActions.TILE_UPDATE_SUCCESS:
-        return Object.assign({}, state, { game: gameReducer(state.game, action) });
+        let game = gameReducer(state.game, action);
+        return Object.assign({}, state, { game });
+
       case GameActions.MY_TURN_UPDATE:
-        return Object.assign({}, state, { isMyTurn: myTurnReducer(state.isMyTurn, action) });
+        let isMyTurn = myTurnReducer(state.isMyTurn, action);
+        return Object.assign({}, state, { isMyTurn });
+
       default:
         return state;
     }
@@ -64,15 +76,23 @@ export const getGame = createSelector(
   getGameState,
   (state: GameState) => state.game);
 
+export const getResult = createSelector(
+  getGameState,
+  (state: GameState) => state.result);
+
 export const getMyTurn = createSelector(
   getGameState,
   (state: GameState) => state.isMyTurn);
+
+  export const getMyTileState = createSelector(
+  getGameState,
+  (state: GameState) => state.myTileState);
 
 export const getOpponent = createSelector(
   getGameState,
   (state: GameState) => state.opponent);
 
-  export const getOpponentTileState = createSelector(
+export const getOpponentTileState = createSelector(
   getGameState,
   (state: GameState) => state.opponentTileState);
 

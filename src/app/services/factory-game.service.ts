@@ -9,7 +9,6 @@ import { OpponentService } from './opponent.service';
 
 import { AppState } from '../store/state';
 
-
 @Injectable()
 export class FactoryGameService {
 

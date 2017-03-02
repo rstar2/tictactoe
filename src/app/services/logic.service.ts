@@ -1,34 +1,29 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { Store } from '@ngrx/store';
+import { Injectable } from '@angular/core';
 
 import { Matrix, Tile, TileState, GameResult } from '../model';
-import { AppState } from '../store/state';
-import { getGame } from '../store/reducers';
 
 @Injectable()
-export class LogicService implements OnInit {
+export class LogicService {
 
-  gameResult$: Observable<GameResult>;
-
-  constructor(private store: Store<AppState>) {}
-
-  ngOnInit(): void {
-    // use the store (and listen to changes from it)
-    this.gameResult$ = this.store.select(getGame)
-      .delay(100)
-      .map(game => this.checkGame(game.tiles))
-      .filter(result => result !== GameResult.NotEnded);
-  }
 
   /**
-  *  @returns valid game result
-  */
-  private checkGame(tiles: Matrix<Tile>): GameResult {
+   * @returns valid game result
+   */
+  checkGame(tiles: Matrix<Tile>): GameResult {
+    let result = GameResult.NotEnded;
+    let count = 0;
 
+    tiles.forEach(tile => {
+      if (tile.state !== TileState.Empty)
+        count++;
 
-
-    return null;
+      if (count == 3) {
+        result = GameResult.Win;
+        return true;
+      }
+      return false;
+    });
+    return result;
   }
 
 }

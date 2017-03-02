@@ -1,10 +1,11 @@
+import { GameResult } from '../../model/game-result';
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IndexPair, TileState, Tile, Game } from '../../model';
 import { GameService } from '../../services/game.service';
 import { AppState } from '../../store/state';
-import { getGame, getMyTurn } from '../../store/reducers';
+import { getGame, getMyTurn, getMyTileState, getResult } from '../../store/reducers';
 import { GameActions } from '../../store/actions';
 
 
@@ -38,25 +39,29 @@ import { GameActions } from '../../store/actions';
 export class GameComponent implements OnInit {
 
   game: Game;
-
-  tileStateMe: TileState;
-  tileStateOpponent: TileState;
-
+  myTileState: TileState;
   isMyTurn: boolean;
 
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.tileStateMe = TileState.Ex1;
-    this.tileStateOpponent = TileState.Zero0;
-
     this.store.select(getGame).subscribe((game: Game) => {
       this.game = game;
     });
 
     this.store.select(getMyTurn).subscribe((isMyTurn: boolean) => {
       this.isMyTurn = isMyTurn;
+    });
+
+    this.store.select(getMyTileState).subscribe((tileState: TileState) => {
+      this.myTileState = tileState;
+    });
+
+    this.store.select(getResult).subscribe((result: GameResult) => {
+      if (result == GameResult.Win) {
+        alert("WIN");
+      }
     });
   }
 
@@ -71,7 +76,7 @@ export class GameComponent implements OnInit {
       return;
     }
 
-    let tileNew = Object.assign({}, tile, { state: this.isMyTurn ? this.tileStateMe : this.tileStateOpponent });
+    let tileNew = Object.assign({}, tile, { state: this.myTileState });
     this.store.dispatch(new GameActions.TileUpdateAction(tileNew));
   }
 
