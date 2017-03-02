@@ -64,13 +64,10 @@ export class GameEffects {
 
 
   @Effect()
-  checkGameResult$ = Observable.defer(() => {
-    return this.store.select(getGame)
-      .map(game => this.logicService.checkGame(game.tiles))
-      .filter(result =>
-      result !== GameResult.Started && result !== GameResult.NotEnded)
-      .map(result => new GameActions.GameEndAction(result));
-  });
+  checkGameResult$ = this.store.select(getGame)
+    .map(game => this.logicService.checkGame(game.tiles))
+    .filter(result => result !== GameResult.Started && result !== GameResult.NotEnded)
+    .map(result => new GameActions.GameEndAction(result));
 
 
 
