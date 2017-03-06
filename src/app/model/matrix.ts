@@ -1,4 +1,3 @@
-import { GameResult } from './game-result';
 /**
  * Created by rumen on 2/15/2017.
  */
@@ -10,9 +9,9 @@ export class Matrix<T> {
   constructor(private data: Array<Array<T>>) { }
 
   forEach(callbackfn: (value: T) => boolean) {
-    this.data.some((col: Array<T>, colIndex: number): boolean => {
+    this.data.some((row: Array<T>): boolean => {
       let toStop = false;
-      col.some((item: T, rowIndex: number): boolean => {
+      row.some((item: T): boolean => {
         toStop = callbackfn(item);
         return toStop;
       });
@@ -21,18 +20,61 @@ export class Matrix<T> {
   }
 
   map(callbackfn: (value: T) => T): Matrix<T> {
-    let newMatrix: Array<Array<T>> = [];
+    let matrixNew: Array<Array<T>> = [];
 
-    this.data.forEach((col: Array<T>, colIndex: number) => {
-      let row: Array<T> = [];
-      newMatrix.push(row);
-      col.forEach((item: T, rowIndex: number) => {
+    this.data.forEach((row: Array<T>) => {
+      let rowNew: Array<T> = [];
+      matrixNew.push(row);
+      row.forEach((item: T) => {
         let itemNew: T = callbackfn(item);
-        row.push(itemNew);
+        rowNew.push(itemNew);
       });
     });
 
-    return new Matrix(newMatrix);
+    return new Matrix(matrixNew);
+  }
+
+  forTicTacToe(callbackfn: (value: T[]) => boolean): void {
+    let toStop = false;
+
+    // parse all rows
+    this.data.some((row: Array<T>, rowIndex: number): boolean => {
+      toStop = callbackfn(row);
+      return toStop;
+    });
+
+    const len = this.data.length;
+
+    // parse all colummns
+    if (!toStop) {
+      for (let j = 0; j < len; j++) {
+        let col: T[] = [];
+        for (let i = 0; i < len; i++) {
+          col.push(this.data[i][j]);
+        }
+        toStop = callbackfn(col);
+        if (toStop) {
+          break;
+        }
+      }
+    }
+
+    // parse both diagonals
+    if (!toStop) {
+      let diagonal: T[] = [];
+      for (let i = 0; i < len; i++) {
+        diagonal.push(this.data[i][i]);
+      }
+      toStop = callbackfn(diagonal);
+    }
+
+    if (!toStop) {
+      let diagonal: T[] = [];
+      for (let i = 0, j = len - 1; i < len; i++ , j--) {
+        diagonal.push(this.data[i][j]);
+      }
+      toStop = callbackfn(diagonal);
+    }
   }
 
 }

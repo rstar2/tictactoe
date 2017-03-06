@@ -3,7 +3,7 @@
  */
 
 import { Tile, emptyTile } from './tile';
-import { Matrix } from "./matrix";
+import { Matrix } from './matrix';
 
 export interface Game {
   readonly tiles: Matrix<Tile>;
