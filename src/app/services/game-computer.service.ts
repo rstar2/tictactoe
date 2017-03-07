@@ -23,10 +23,10 @@ export class GameComputerService extends GameService implements OnInit {
     let appState: AppState = getState(this.store);
     if (getResult(appState) === GameResult.NotEnded) {
       // simulate computer's turn after some timeout
-      setTimeout(() => {
+      // setTimeout(() => {
         let oppTile = this.chooseRandomTile(appState);
         this.store.dispatch(new GameActions.TileUpdateSuccessAction(oppTile));
-      }, 2000);
+      // }, 2000);
     }
   }
 

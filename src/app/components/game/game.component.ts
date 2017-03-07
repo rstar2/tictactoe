@@ -59,9 +59,7 @@ export class GameComponent implements OnInit {
     });
 
     this.store.select(getResult).subscribe((result: GameResult) => {
-      if (result == GameResult.Win) {
-        alert("WIN");
-      }
+      alert(GameResult[result]);
     });
   }
 

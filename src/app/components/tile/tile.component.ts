@@ -20,10 +20,10 @@ import { Tile, TileState } from '../../model';
   changeDetection: ChangeDetectionStrategy.Default,
   template: `
     <svg class="tile" [ngSwitch]="tile.state">
-        <circle class="Empty" cx="50" cy="50" r="40"  />
+        <path [attr.class]="tileClass" *ngSwitchCase="TileState.Ex1" d="M 30,30 L 70,70 M 70,30 L 30,70" />
 
-        <path [attr.class]="tileClass" *ngSwitchCase="TileState.Zero0" d="M 10,10 L 30,30 M 30,10 L 10,30" />
-        <polygon [attr.class]="tileClass" *ngSwitchCase="TileState.Ex1" points="50,10 10,90 90,35 10,35 90,90"/>
+        <circle [attr.class]="tileClass" *ngSwitchCase="TileState.Zero0" class="Empty" cx="50" cy="50" r="30"  />
+        <!--<polygon [attr.class]="tileClass" *ngSwitchCase="TileState.Zero0" points="50,10 10,90 90,35 10,35 90,90"/> -->
     </svg>
   `,
   styleUrls: ['./tile.component.css']
