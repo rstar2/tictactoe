@@ -5,7 +5,7 @@
 import { Action, ActionReducer } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
-import { Game, Tile } from '../../model';
+import { Game, Tile, TileState } from '../../model';
 import { GameState, initialGameState } from '../state/game';
 import { GameActions } from '../actions';
 import { AppState } from '../state';
@@ -15,8 +15,18 @@ let tileReducer = (tile: Tile, action: Action): Tile => {
     case GameActions.TILE_UPDATE_SUCCESS:
       const tileNew: Tile = (<GameActions.TileUpdateSuccessAction>action).payload;
 
+      // new state should be valid
+      if (tileNew.state === TileState.Empty) {
+        throw new Error('Updating with new state should be valid and not Empty for ' + tileNew);
+      }
+
       if (!tile.index.equals(tileNew.index)) {
         return tile;
+      }
+
+      // old state should be still Empty
+      if (tile.state !== TileState.Empty) {
+        throw new Error('Tile is already updated: ' + tile + ', cannot set it to ' + tileNew);
       }
 
       return Object.assign({}, tile, tileNew);
@@ -84,7 +94,7 @@ export const getMyTurn = createSelector(
   getGameState,
   (state: GameState) => state.isMyTurn);
 
-  export const getMyTileState = createSelector(
+export const getMyTileState = createSelector(
   getGameState,
   (state: GameState) => state.myTileState);
 

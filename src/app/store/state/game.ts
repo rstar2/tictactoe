@@ -30,7 +30,7 @@ export function initialGameState(len1: number, len2: number, isMyGame: boolean):
   let state = {
     game: initialGame(len1, len2),
     opponent: null,
-    result: GameResult.Started
+    result: GameResult.NotEnded
   };
   return Object.assign(state, startGame(isMyGame));
 }

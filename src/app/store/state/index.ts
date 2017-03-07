@@ -5,6 +5,8 @@
 import { GameState } from './game';
 import { UIState } from './ui';
 
+export { GameState, UIState };
+
 export interface AppState {
   game: GameState;
   ui: UIState;

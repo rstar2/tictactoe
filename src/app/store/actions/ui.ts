@@ -4,7 +4,7 @@
 
 import { Action } from '@ngrx/store';
 
-import { type } from '../utils';
+import { type } from '../../utils';
 
 export const UI_TITLE_UPDATE: string = type('[UI] Title Update');
 

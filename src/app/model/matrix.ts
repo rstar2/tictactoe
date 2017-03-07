@@ -1,7 +1,7 @@
 /**
  * Created by rumen on 2/15/2017.
  */
-
+import * as utils from '../utils';
 import { IndexPair } from './index-pair';
 
 export class Matrix<T> {
@@ -24,7 +24,7 @@ export class Matrix<T> {
 
     this.data.forEach((row: Array<T>) => {
       let rowNew: Array<T> = [];
-      matrixNew.push(row);
+      matrixNew.push(rowNew);
       row.forEach((item: T) => {
         let itemNew: T = callbackfn(item);
         rowNew.push(itemNew);
@@ -34,7 +34,7 @@ export class Matrix<T> {
     return new Matrix(matrixNew);
   }
 
-  forTicTacToe(callbackfn: (value: T[]) => boolean): void {
+  forEachTicTacToe(callbackfn: (value: T[]) => boolean): void {
     let toStop = false;
 
     // parse all rows
@@ -75,6 +75,42 @@ export class Matrix<T> {
       }
       toStop = callbackfn(diagonal);
     }
+  }
+
+  getRandom(predicate: (item: T) => boolean): T {
+    let rows: number[] = [];
+
+    const len = this.data.length;
+
+    // select a renadom row first
+    for (let i = 0; i < len; i++) {
+      for (let j = 0; j < len; j++) {
+        if (predicate(this.data[i][j])) {
+          rows.push(i);
+          break;
+        }
+      }
+    }
+
+    if (rows.length === 0) {
+      return null;
+    }
+
+    let random = utils.getRandomIntInclusive(0, rows.length - 1);
+    let index1 = rows[random];
+
+    // get a random column inside this row
+    let cols: number[] = []
+    for (let j = 0; j < len; j++) {
+      if (predicate(this.data[index1][j])) {
+        cols.push(j);
+      }
+    }
+
+    random = utils.getRandomIntInclusive(0, cols.length - 1);
+    let index2 = cols[random];
+
+    return this.data[index1][index2];
   }
 
 }

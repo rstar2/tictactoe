@@ -8,13 +8,11 @@ export const UID_COMPUTER = '__!__Computer__!__';
 @Injectable()
 export class OpponentService implements OnInit {
 
-  private oppoentUid: string;
-
   ngOnInit(): void {
   }
 
   isComputer(oppoentUid): boolean {
-    return this.oppoentUid === UID_COMPUTER;
+    return oppoentUid === UID_COMPUTER;
   }
 
   getOpponents(isAddComputer = true): Observable<Opponent[]> {

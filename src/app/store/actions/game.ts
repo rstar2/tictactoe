@@ -4,7 +4,7 @@
 
 import { Action } from '@ngrx/store';
 
-import { type } from '../utils';
+import { type } from '../../utils';
 import { Tile, GameResult, Opponent } from '../../model';
 
 export const GAME_START: string = type('[Game] Start');

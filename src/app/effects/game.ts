@@ -4,9 +4,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { AppState } from '../store/state';
-import { getGame } from '../store/reducers';
+import { getState, getGame, getOpponentTileState } from '../store/reducers';
 import { GameActions } from '../store/actions';
-import { GameResult } from '../model';
+import { Tile, TileState, GameResult } from '../model';
 import { FactoryGameService, LogicService } from '../services';
 
 @Injectable()
@@ -39,22 +39,6 @@ export class GameEffects {
   }
 
   @Effect({ dispatch: false })
-  tileUpdate$ = this.update$
-    .ofType(GameActions.TILE_UPDATE)
-    .filter(() => this.checkGameService())
-    .do(() => this.store.dispatch(new GameActions.MyTurnUpdateAction(false)))
-    .map(action => action.payload)
-    .do(tile => this.factoryGameService.getGameService().updateTile(tile));
-
-  // just for testing
-  @Effect()
-  myTurnUpdate$ = this.update$
-    .ofType(GameActions.TILE_UPDATE_SUCCESS)
-    .filter(() => this.checkGameService())
-    .delay(3000)
-    .map(() => new GameActions.MyTurnUpdateAction(true));
-
-  @Effect({ dispatch: false })
   gameStartUpdate$ = this.update$
     .ofType(GameActions.GAME_START)
     .filter(() => this.checkGameService(false))
@@ -66,9 +50,25 @@ export class GameEffects {
   @Effect()
   checkGameResult$ = this.store.select(getGame)
     .map(game => this.logicService.checkGame(game.tiles))
-    .filter(result => result !== GameResult.Started && result !== GameResult.NotEnded)
     .map(result => new GameActions.GameEndAction(result));
 
+
+  @Effect({ dispatch: false })
+  tileUpdate$ = this.update$
+    .ofType(GameActions.TILE_UPDATE)
+    .filter(() => this.checkGameService())
+    .do(() => this.store.dispatch(new GameActions.MyTurnUpdateAction(false)))
+    .map(action => action.payload)
+    .do(tile => this.factoryGameService.getGameService().updateTile(tile));
+
+  @Effect()
+  tileUpdateSuccess$ = this.update$
+    .ofType(GameActions.TILE_UPDATE_SUCCESS)
+    .filter(() => this.checkGameService())
+    .map(action => action.payload)
+    // filter out my turn success  and wait for opponent's turn success update
+    .filter((tile: Tile) => tile.state === getOpponentTileState(getState(this.store)))
+    .map(() => new GameActions.MyTurnUpdateAction(true));
 
 
 }
