@@ -40,7 +40,7 @@ export class GameEffects {
 
   @Effect({ dispatch: false })
   gameStartUpdate$ = this.update$
-    .ofType(GameActions.GAME_START)
+    .ofType(GameActions.OPPONENT_UPDATE)
     .filter(() => this.checkGameService(false))
     .map(action => action.payload)
     .map(payload => payload.opponent)

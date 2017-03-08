@@ -1,3 +1,4 @@
+import { RouterLinkActive } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -10,8 +11,8 @@ import { getTitle } from './store/reducers';
   template: `
         <h1> {{title}} </h1>
         <nav>
-           <a routerLink="/login">Login</a>
-           <a routerLink="/start">Start</a>
+           <a routerLink="/login" routerLinkActive="active">Login</a>
+           <a routerLink="/opponent" routerLinkActive="active">Opponent</a>
         </nav>
         <router-outlet></router-outlet>
 `

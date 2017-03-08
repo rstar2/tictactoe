@@ -1,5 +1,3 @@
-import { GameStartAction } from '../../store/actions/game';
-
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -13,19 +11,18 @@ import { FactoryGameService, OpponentService, UID_COMPUTER } from '../../service
 @Component({
   selector: 'app-opponent',
   template: `
-        <h1>
+        <label>Select opponent</label>
+
         <select #select>
            <option *ngFor="let opp of opponents$ | async"
               [value]="serializeOpponent(opp)">
               {{opp.name}}
            </option>
         </select>
-        </h1>
 
         <nav>
-           <a (click)="startGame(select.value)">Game</a>
+           <a href="javascript:void(0)" (click)="startGame(select.value)">Start Game</a>
         </nav>
-        <router-outlet></router-outlet>
 `
 })
 export class OpponentComponent implements OnInit {
@@ -33,12 +30,13 @@ export class OpponentComponent implements OnInit {
   opponents$: Observable<Opponent[]>;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private oppenentService: OpponentService,
+    private opponentService: OpponentService,
     private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    this.opponents$ = this.oppenentService.getOpponents();
+    // here the unsupsciption is handled internally vy the Angula 'async' pipe
+    this.opponents$ = this.opponentService.getOpponents();
   }
 
   serializeOpponent(opp: Opponent): string {
@@ -50,9 +48,9 @@ export class OpponentComponent implements OnInit {
 
   startGame(oppJSON: string) {
     let opponent = this.deserializeOpponent(oppJSON);
-    this.store.dispatch(new GameActions.GameStartAction({ opponent, isMyGame: true }));
+    this.store.dispatch(new GameActions.OpponentUpdateAction({ opponent, isMyGame: true }));
 
     this.router.navigate(['game'],
-      { relativeTo: this.route, queryParams: { uid: opponent.uid } });
+      { /*relativeTo: this.route,*/ queryParams: { uid: opponent.uid } });
   }
 }

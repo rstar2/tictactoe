@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/start', pathMatch: 'full' },
+  { path: '', redirectTo: '/opponent', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

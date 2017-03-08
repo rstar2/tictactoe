@@ -58,9 +58,14 @@ let myTurnReducer = (isMyTurn, action: Action): boolean => {
 export const gameStateReducer = (len1: number, len2: number): ActionReducer<GameState> => {
   return (state: GameState = initialGameState(len1, len2, true), action: Action): GameState => {
     switch (action.type) {
-      case GameActions.GAME_START:
-        let { opponent, isMyGame } = (<GameActions.GameStartAction>action).payload;
+      case GameActions.OPPONENT_UPDATE:
+        let { opponent, isMyGame } = (<GameActions.OpponentUpdateAction>action).payload;
         return Object.assign({}, initialGameState(len1, len2, isMyGame), { opponent });
+
+      case GameActions.GAME_START: {
+        let isMyTurn = (<GameActions.GameStartAction>action).payload;
+        return Object.assign({}, initialGameState(len1, len2, isMyTurn));
+      }
 
       case GameActions.GAME_END:
         let result = (<GameActions.GameEndAction>action).payload;

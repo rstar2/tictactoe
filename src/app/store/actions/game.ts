@@ -7,15 +7,22 @@ import { Action } from '@ngrx/store';
 import { type } from '../../utils';
 import { Tile, GameResult, Opponent } from '../../model';
 
+export const OPPONENT_UPDATE: string = type('[Opponent] Update');
 export const GAME_START: string = type('[Game] Start');
 export const GAME_END: string = type('[Game] End');
 export const TILE_UPDATE: string = type('[Tile] Update - REQUEST');
 export const TILE_UPDATE_SUCCESS: string = type('[Tile] Update - SUCCESS');
 export const MY_TURN_UPDATE: string = type('[MyTurn] Update');
 
+export class OpponentUpdateAction implements Action {
+  type = OPPONENT_UPDATE;
+  constructor(public payload: { opponent: Opponent, isMyGame: boolean }) {
+  }
+}
+
 export class GameStartAction implements Action {
   type = GAME_START;
-  constructor(public payload: { opponent: Opponent, isMyGame: boolean }) {
+  constructor(public payload: boolean) {
   }
 }
 
