@@ -30,12 +30,14 @@ import { GameActions } from '../../store/actions';
     </div>
 
     <!-- using a structural directive - not ready yet -->
+    <!--
     <ng-container *appForEachTile="let tile of game.tiles">
         <app-tile
             [tile]="tile"
             (click)="onTileClick(tile, $event)"
          ></app-tile>
     </ng-container>
+    -->
   `,
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./game.component.css']
