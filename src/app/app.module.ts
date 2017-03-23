@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from 'angularfire2';
 
 import appStoreReducer from './store';
-import services from './services';
+import { services } from './services';
 import firebaseConfig from './firebase.config';
 import { GameEffects, UIEffects } from './effects';
 import { ComponentsModule } from './components/components.module';

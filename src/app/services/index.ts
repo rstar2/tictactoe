@@ -10,6 +10,8 @@ export * from './ui.service';
 export * from './opponent.service';
 export * from './logic.service';
 
-export default [UIService, OpponentService, FactoryGameService, LogicService];
+// export as an array, not as default as then the AOT compilator is complaning with
+// "ERROR in Cannot read property 'provide' of null"
+export const services = [UIService, OpponentService, FactoryGameService, LogicService];
 
 
