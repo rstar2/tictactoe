@@ -13,7 +13,7 @@
     "heroku:preinstall": "npm install -g http-server",
     "heroku:build": "ng build --prod",
     "heroku:serve": "http-server dist/",
-    "heroku:start": "npm run heroku:preinstall | npm run heroku:build | npm run heroku:serve",
+    "heroku:start": "npm run heroku:preinstall && npm run heroku:build && npm run heroku:serve",
     "heroku:deploy": "git push origin master && git push heroku master"
   },
   "private": true,
