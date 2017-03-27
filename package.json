@@ -13,12 +13,12 @@
     "//": "existing Heroku hooks (heroku-prebuild and heroku-postbuild)",
     "-heroku-prebuild": "npm install -g http-server",
     "-heroku-postbuild": "ng build --prod",
-    "//": "custom Heroku start script in Procfile",
-    "//": "this is useful if http-server will be used for serving,",
-    "//": "but now I use the Heroku static-buildpack https://github.com/heroku/heroku-buildpack-static",
-    "//": "which is super for SPA apps like Angular",
+    "///": "custom Heroku start script in Procfile",
+    "////": "this is useful if http-server will be used for serving,",
+    "/////": "but now I use the Heroku static-buildpack https://github.com/heroku/heroku-buildpack-static",
+    "//////": "which is super for SPA apps like Angular",
     "-heroku:start": "http-server dist/",
-    "//": "just a Heroku deploy shorcut",
+    "///////": "just a Heroku deploy shorcut",
     "heroku:deploy": "git push origin master && git push heroku master"
   },
   "engines" : {
