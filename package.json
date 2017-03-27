@@ -10,15 +10,15 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
-    // existing Heroku hooks (heroku-prebuild and heroku-postbuild)
+    "//": "existing Heroku hooks (heroku-prebuild and heroku-postbuild)",
     "-heroku-prebuild": "npm install -g http-server",
     "-heroku-postbuild": "ng build --prod",
-    // custom Heroku start script in Procfile
-    // this is useful if http-server will be used for serving,
-    // but now I use the Heroku static-buildpack https://github.com/heroku/heroku-buildpack-static
-    // which is super for SPA apps like Angular
+    "//": "custom Heroku start script in Procfile",
+    "//": "this is useful if http-server will be used for serving,",
+    "//": "but now I use the Heroku static-buildpack https://github.com/heroku/heroku-buildpack-static",
+    "//": "which is super for SPA apps like Angular",
     "-heroku:start": "http-server dist/",
-    // just a Heroku deploy shorcut
+    "//": "just a Heroku deploy shorcut",
     "heroku:deploy": "git push origin master && git push heroku master"
   },
   "engines" : {
@@ -42,13 +42,14 @@
     "angularfire2": "^2.0.0-beta.7",
     "core-js": "^2.4.1",
     "firebase": "^3.6.9",
+    "ngrx-store-freeze": "^0.1.6",
     "reselect": "^2.5.4",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2",
 
-    "angular-cli": "1.0.0-beta.24",
-    "ngrx-store-freeze": "^0.1.6"
+    "//": "for building on Heroku (when only dependencies are install the 'angular-cli'",
+    "angular-cli": "1.0.0-beta.24"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
